@@ -4,14 +4,11 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import weather.model.Forecast;
 import weather.model.Request;
 import weather.model.RequestRule;
 import weather.model.enumeration.FeatureType;
-import weather.service.RequestService;
 
 import java.io.IOException;
 import java.util.*;
@@ -20,10 +17,8 @@ import java.util.*;
  * @author vosipenko
  *         on 15.02.2015.
  */
-@Component
+@Component("pogoda.yandex.by")
 public class YandexProvider implements WeatherForecastProvider {
-    @Autowired(required = false)
-    private RequestService requestService;
 
     @Override
     public List<Request> getWeather(RequestRule requestRule) {

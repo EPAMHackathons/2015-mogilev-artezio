@@ -6,6 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 import weather.model.Forecast;
 import weather.model.Request;
 import weather.model.RequestRule;
@@ -13,7 +14,7 @@ import weather.model.enumeration.FeatureType;
 import weather.model.weather.enumeration.*;
 
 import java.util.*;
-
+@Component("pogoda.by")
 public class PogodaBYProvider implements WeatherForecastProvider {
 
     @Override

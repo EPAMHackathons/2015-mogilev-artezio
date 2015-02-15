@@ -10,6 +10,7 @@
 
     <context:component-scan base-package="weather.dao"/>
     <context:component-scan base-package="weather.service"/>
+    <context:component-scan base-package="weather.provider"/>
     <context:component-scan base-package="weather.beans"/>
 
     <import resource="classpath:dao-context.xml"/>
