@@ -1,10 +1,10 @@
 package weather.provider;
 
 
-import weather.model.Forecast;
+import weather.model.Request;
 
 import java.util.List;
 
 public interface WeatherForecastProvider {
- List<Forecast> getWeather(String providerUrl);
+ List<Request> getWeather(String providerUrl);
 }
