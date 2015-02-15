@@ -6,5 +6,53 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
+    <changeSet author="amarkevich" id="20150215-00" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">select count(*) from information_schema.schemata WHERE schema_name = 'top_weather';</sqlCheck>
+        </preConditions>
+        <sql>
+            DROP SCHEMA TOP_WEATHER CASCADE;
+            DROP SEQUENCE location_seq;
+            DROP SEQUENCE provider_seq;
+            DROP SEQUENCE request_rule_seq;
+            DROP SEQUENCE request_seq;
+            DROP SEQUENCE forecast_seq;
+        </sql>
+    </changeSet>
+
+
+    <changeSet author="amarkevich" id="20150215-02" runAlways="true" runOnChange="true">
+        <sql>
+            CREATE SCHEMA TOP_WEATHER;
+        </sql>
+    </changeSet>
+
+
+
+    <changeSet author="amarkevich" id="20150215-07" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">select count(*) FROM pg_class c WHERE c.relkind = 'S' AND c.relname = 'location_seq';</sqlCheck>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE location_seq;
+        </sql>
+    </changeSet>
+
+
+    <changeSet author="amarkevich" id="20150215-08" runAlways="true" runOnChange="true">
+        <comment>Location</comment>
+        <sql>
+            CREATE TABLE TOP_WEATHER.LOCATIONS
+            (
+            LOCATION_ID BIGINT PRIMARY KEY DEFAULT nextval('location_seq'),
+            UID varchar(2000),
+            NAME varchar(2000) NOT NULL,
+            COUNTRY varchar(2000),
+            CITY varchar(2000),
+            GPS_POSITION varchar(2000),
+            ADD_DATE timestamp default now()
+            )
+        </sql>
+    </changeSet>
 
 </databaseChangeLog> 
