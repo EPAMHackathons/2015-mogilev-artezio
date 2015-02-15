@@ -39,11 +39,6 @@ public class Forecast extends BaseEntity implements Serializable {
         this.featureType = featureType;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "VERIFICATION_FORECAST_ID", nullable = true)
-
-    private Forecast verificationForecast;
-
     public Long getForecastId() {
         return forecastId;
     }
@@ -82,14 +77,6 @@ public class Forecast extends BaseEntity implements Serializable {
 
     public void setRate(Integer rate) {
         this.rate = rate;
-    }
-
-    public Forecast getVerificationForecast() {
-        return verificationForecast;
-    }
-
-    public void setVerificationForecast(Forecast verificationForecast) {
-        this.verificationForecast = verificationForecast;
     }
 
     public Request getRequest() {

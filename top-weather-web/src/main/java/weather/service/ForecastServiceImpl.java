@@ -67,7 +67,8 @@ public class ForecastServiceImpl extends AbstractSpringService<ForecastDao, Fore
                 RateTableRowDto row = rowDtoMap.get(forecastRateDto.getProvider());
                 Map<Pair<Period, FeatureType>, RateTableCellDto> cells = row.getCellDtoMap();
                 RateTableCellDto cell = new RateTableCellDto();
-                cell.setRate(forecastRateDto.getRate().intValue());
+                if (forecastRateDto.getRate() != null)
+                    cell.setRate(forecastRateDto.getRate().intValue());
                 cells.put(new Pair(forecastRateDto.getPeriod(), forecastRateDto.getFeatureType()), cell);
             }
         }

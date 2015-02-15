@@ -59,6 +59,8 @@ public class ForecastDaoImpl extends AbstractHibernateDao<Forecast> implements F
         }
         criteria.add(Restrictions.ge("request.forecastDate",  Utils.formatStartDate(calRatePeriod.getTime())));
 
+        criteria.add(Restrictions.isNotNull("rate"));
+
         ProjectionList projectionList = Projections.projectionList();
         projectionList.add(Projections.groupProperty("requestRule.provider").as("provider"));
         projectionList.add(Projections.avg("rate").as("rate"));
