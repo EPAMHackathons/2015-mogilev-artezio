@@ -86,6 +86,7 @@ public class TopWeatherBean {
                             if (rate != null) {
                                 System.out.println(String.format("Rate calculated. rate=%d", rate));
                                 ratedForecast.setRate(rate);
+                                System.out.println(String.format("Rate calculated. ForecastDate=%s, RequestDate=%s", ratedForecast.getRequest().getForecastDate(), ratedForecast.getRequest().getRequestDate()));
                                 forecastService.save(ratedForecast);
                             } else {
                                 System.out.println(String.format("Rate not calculated. ratedForecast=%s, proveForecast=%s", ratedForecast.getValue(), proveForecast.getValue()));
