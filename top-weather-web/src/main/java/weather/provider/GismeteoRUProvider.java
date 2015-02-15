@@ -43,11 +43,12 @@ public class GismeteoRUProvider implements WeatherForecastProvider {
             Document doc = connection.get();
             weeksRequests = new ArrayList<Request>();
             int startTab = additionalURL == null ? 1 : 2;
-
+            Request dayRequest = new Request();
             for(int i = startTab; i < 4; i++){
                 Element forecastWeather = doc.getElementById(String.format(tbDaily, Integer.toString(i)));
                 Elements forecastRows = forecastWeather.getElementsByTag("tr");
                 int rowNumber = 0;
+
                 for (; rowNumber < forecastRows.size(); rowNumber++) {
                     Elements forecastCells = forecastRows.get(rowNumber). children();
                     String periodOfDayString = forecastCells.get(0).text().trim().toLowerCase();
@@ -63,10 +64,11 @@ public class GismeteoRUProvider implements WeatherForecastProvider {
                             periodOfDay = PeriodOfDay.NIGHT;
                     }
                     if (periodOfDay != null && (periodOfDay.equals(PeriodOfDay.DAY) || periodOfDay.equals(PeriodOfDay.NIGHT))) {
-                            weeksRequests.add(parseForecastWeather(calendar.getTime(), periodOfDay, forecastCells, rule));
+                            weeksRequests.add(parseForecastWeather(calendar.getTime(), periodOfDay, forecastCells, rule, dayRequest));
                     }
                 }
                 calendar.add(Calendar.DATE, 1);
+                dayRequest = new Request();
             }
         } catch (Exception e) {
             weeksRequests = null;
@@ -74,7 +76,7 @@ public class GismeteoRUProvider implements WeatherForecastProvider {
         return weeksRequests;
 
     }
-    private Request parseForecastWeather(Date weatherDay, PeriodOfDay periodOfDay, Elements forecastCells, RequestRule rule) {
+    private Request parseForecastWeather(Date weatherDay, PeriodOfDay periodOfDay, Elements forecastCells, RequestRule rule, Request dayRequest) {
 
         String temperatureStr = forecastCells.get(3).child(0).text();
         int temperature = Integer.parseInt(temperatureStr.replace("+", "").replace("−", "-"));
@@ -87,8 +89,9 @@ public class GismeteoRUProvider implements WeatherForecastProvider {
         } else {
             overcast = overcastDecode(overcastPhenomenasString.trim());
         }
-        Request dayRequest = new Request();
+
         Forecast temperatureForecast = new Forecast();
+        temperatureForecast.setRequest(dayRequest);
         FeatureType featuretype;
         if(periodOfDay.equals(PeriodOfDay.DAY)){
             featuretype = FeatureType.TEMPERATURE_DAY;
@@ -105,6 +108,7 @@ public class GismeteoRUProvider implements WeatherForecastProvider {
             featuretype = FeatureType.OVERCAST_NIGHT;
         }
         Forecast overcastForecast = new Forecast();
+        overcastForecast.setRequest(dayRequest);
         overcastForecast.setFeatureType(featuretype);
         overcastForecast.setValue(overcast);
         dayRequest.getForecasts().put(featuretype, overcastForecast);
@@ -115,6 +119,7 @@ public class GismeteoRUProvider implements WeatherForecastProvider {
             featuretype = FeatureType.PHENOMENA_NIGHT;
         }
         Forecast phenomenaForecast = new Forecast();
+        phenomenaForecast.setRequest(dayRequest);
         phenomenaForecast.setFeatureType(featuretype);
         phenomenaForecast.setValue(phenomens);
         dayRequest.getForecasts().put(featuretype, phenomenaForecast);

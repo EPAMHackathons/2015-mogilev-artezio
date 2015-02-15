@@ -34,7 +34,7 @@ public class PogodaBYProvider implements WeatherForecastProvider {
             int dayCount = 1;
             weeksRequests = new ArrayList<Request>();
             Date weatherDay = null;
-
+            Request dayRequest = null;
             for (; rowNumber < forecastRows.size(); rowNumber++) {
                 Elements forecastCells = forecastRows.get(rowNumber).getElementsByTag("td");
                 String periodOfDayString = forecastCells.get(0).text().trim();
@@ -52,13 +52,14 @@ public class PogodaBYProvider implements WeatherForecastProvider {
 
                 if (periodOfDay != null) {
                     if (periodOfDay.equals(PeriodOfDay.DAY) || periodOfDay.equals(PeriodOfDay.NIGHT)) {
-                            weeksRequests.add(parseForecastWeather(weatherDay, periodOfDay, forecastCells, rule));
+                            weeksRequests.add(parseForecastWeather(weatherDay, periodOfDay, forecastCells, rule, dayRequest));
                     }
                 } else {
                     if(dayCount == 6)
                     {
                         break;
                     }
+                    dayRequest = new Request();
                     if(weatherDay != null) {
                         calendar.add(Calendar.DATE, 1);
                     }
@@ -72,7 +73,7 @@ public class PogodaBYProvider implements WeatherForecastProvider {
         return weeksRequests;
     }
 
-    private Request parseForecastWeather(Date weatherDay, PeriodOfDay periodOfDay, Elements forecastCells, RequestRule rule) {
+    private Request parseForecastWeather(Date weatherDay, PeriodOfDay periodOfDay, Elements forecastCells, RequestRule rule, Request dayRequest) {
 
         String temperatureStr = forecastCells.get(1).text();
         int temperatureFrom = 0;
@@ -90,8 +91,9 @@ public class PogodaBYProvider implements WeatherForecastProvider {
         String overcast = overcastDecode(overcastString.substring(0, overcastString.indexOf(".")));
         String phenomens = phenomensDecode(overcastString.substring(overcastString.indexOf(".") + 1).trim().toLowerCase());
 
-        Request dayRequest = new Request();
+
         Forecast temperatureForecast = new Forecast();
+        temperatureForecast.setRequest(dayRequest);
         FeatureType featuretype;
         if(periodOfDay.equals(PeriodOfDay.DAY)){
             featuretype = FeatureType.TEMPERATURE_DAY;
@@ -108,6 +110,7 @@ public class PogodaBYProvider implements WeatherForecastProvider {
             featuretype = FeatureType.OVERCAST_NIGHT;
         }
         Forecast overcastForecast = new Forecast();
+        overcastForecast.setRequest(dayRequest);
         overcastForecast.setFeatureType(featuretype);
         overcastForecast.setValue(overcast);
         dayRequest.getForecasts().put(featuretype, overcastForecast);
@@ -118,6 +121,7 @@ public class PogodaBYProvider implements WeatherForecastProvider {
             featuretype = FeatureType.PHENOMENA_NIGHT;
         }
         Forecast phenomenaForecast = new Forecast();
+        phenomenaForecast.setRequest(dayRequest);
         phenomenaForecast.setFeatureType(featuretype);
         phenomenaForecast.setValue(phenomens);
         dayRequest.getForecasts().put(featuretype, phenomenaForecast);

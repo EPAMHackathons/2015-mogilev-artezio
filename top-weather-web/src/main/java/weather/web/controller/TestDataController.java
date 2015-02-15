@@ -57,7 +57,7 @@ public class TestDataController {
 
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, -3);
-        for (int i = 0; i < 3 ; i++) {
+        for (int i = 0; i < 2 ; i++) {
             calendar.add(Calendar.DATE, 1);
             dates.add(calendar.getTime());
         }

@@ -35,8 +35,8 @@ public class TopWeatherController {
         List<Location> locations = locationService.getAll();
         mv.addObject("locations", locations);
 
-        RateTableDto tableDto = topWeatherBean.getForecast(locationUid, new Pair(Period.DAY, FeatureType.TEMPERATURE_DAY), OrderType.DESC);
-        weatherUpdater.updateWeather();
+//        weatherUpdater.updateWeather();
+        RateTableDto tableDto = topWeatherBean.getForecast(locationUid, new Pair(Period.DAY, FeatureType.TEMPERATURE_DAY), OrderType.ASC);
         mv.addObject("tableDto", tableDto);
 
         return mv;
