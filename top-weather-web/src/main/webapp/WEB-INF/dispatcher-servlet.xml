@@ -25,7 +25,7 @@
     <task:scheduler id="scheduler" pool-size="10"/>
     <task:executor id="executor" pool-size="10"/>
     <task:annotation-driven scheduler="scheduler" executor="executor"/>
-    <bean id="weatherUpdateScheduler" class="weather.service.WeatherUpdateScheduler" />
+    <!--<bean id="weatherUpdateScheduler" class="weather.service.WeatherUpdateScheduler" />-->
 
 
 </beans>
