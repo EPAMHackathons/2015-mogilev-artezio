@@ -1,10 +1,13 @@
 package weather.dao;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import weather.model.BaseEntity;
+import weather.model.enumeration.OrderType;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -33,6 +36,10 @@ public abstract class AbstractHibernateDao<T extends BaseEntity> implements Dao<
                 type = ((Class<?>) type).getGenericSuperclass();
             }
         }
+    }
+
+    public void addOrder(Criteria criteria, String orderField, OrderType orderType) {
+        criteria.addOrder(OrderType.ASC.equals(orderType) ? Order.asc(orderField) : Order.desc(orderField));
     }
 
     public List<T> getAll() {
