@@ -191,7 +191,7 @@
             VALUES ('WEEK','Минск. pogoda.by. на неделю','http://6.pogoda.by/26850',2,2);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Минск. pogoda.yandex.by. на неделю','https://pogoda.yandex.by/mogilev/details',3,2);
+            VALUES ('WEEK','Минск. pogoda.yandex.by. на неделю','https://pogoda.yandex.by/minsk/details',3,2);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME, REQUEST_LINK, PROVIDER_ID, LOCATION_ID)
             VALUES ('WEEK', 'Минск. weather.com. на неделю', 'https://pogoda.yandex.by/mogilev/details', 4, 2);
@@ -205,7 +205,7 @@
             VALUES ('WEEK','Москва. pogoda.by. на неделю','http://6.pogoda.by/27612',2,3);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Москва. pogoda.yandex.by. на неделю','http://pogoda.yandex.by.....',3,3);
+            VALUES ('WEEK','Москва. pogoda.yandex.by. на неделю','https://pogoda.yandex.by/moscow/details',3,3);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME, REQUEST_LINK, PROVIDER_ID, LOCATION_ID)
             VALUES ('WEEK', 'Москва. weather.com. на неделю', 'http://weather.com.....', 4, 3);
@@ -219,7 +219,7 @@
             VALUES ('WEEK','Париж. pogoda.by. на неделю','http://6.pogoda.by/7149',2,4);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Париж. pogoda.yandex.by. на неделю','http://pogoda.yandex.by.....',3,4);
+            VALUES ('WEEK','Париж. pogoda.yandex.by. на неделю','https://pogoda.yandex.by/paris/details',3,4);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME, REQUEST_LINK, PROVIDER_ID, LOCATION_ID)
             VALUES ('WEEK', 'Париж. weather.com. на неделю', 'http://weather.com.....', 4, 4);
@@ -233,7 +233,7 @@
             VALUES ('WEEK','Анталья. pogoda.by. на неделю','http://6.pogoda.by/17300',2,5);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Анталья. pogoda.yandex.by. на неделю','http://pogoda.yandex.by.....',3,5);
+            VALUES ('WEEK','Анталья. pogoda.yandex.by. на неделю','https://pogoda.yandex.by/antalya/details',3,5);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME, REQUEST_LINK, PROVIDER_ID, LOCATION_ID)
             VALUES ('WEEK', 'Анталья. weather.com. на неделю', 'http://weather.com.....', 4, 5);
