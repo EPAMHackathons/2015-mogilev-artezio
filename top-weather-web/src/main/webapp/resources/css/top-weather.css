@@ -29,11 +29,13 @@ html, body {
 
 /* additional sections */
 #main {
-    background: #87CEFA no-repeat center center fixed;
+    background: url("../img/sky.jpg") no-repeat fixed center top;
     display: table;
     height: 50%;
     position: relative;
     width: 100%;
+    color: #ffffff;
+    text-shadow: 2px 2px 2px black;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -66,4 +68,51 @@ footer .glyphicon:hover {
 
 .scroll-top a:link, .scroll-top a:visited {
     color:#222;
+}
+
+table tbody, table thead tr > th{
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .icon-font-md {
+        font-size: 40px;
+    }
+    .icon-font-lg {
+        font-size: 70px;
+    }
+
+    .icon-font-table-md {
+        font-size: 20px;
+    }
+
+    .icon-font-table-lg {
+        font-size: 40px;
+    }
+
+    .col-sm-1 {
+        width: 14%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .icon-font-md {
+        font-size: 60px;
+    }
+
+    .icon-font-lg {
+        font-size: 100px;
+    }
+
+    .icon-font-table-md {
+        font-size: 40px
+    }
+
+    .icon-font-table-lg {
+        font-size: 60px;
+    }
+
+    .col-lg-1 {
+        width: 14%;
+    }
 }

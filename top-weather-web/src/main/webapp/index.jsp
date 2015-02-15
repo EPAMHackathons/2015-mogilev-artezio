@@ -65,18 +65,86 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-lg-12 col-lg-offset-0">
-                    <table>
-                        <caption></caption>
+                    <table id="forecastTable" class="table table-bordered">
+                        <caption class="text-center caption" style="font-size: 18px; font-weight: bold; color: #000">Процент достоверности прогноза</caption>
                         <thead>
-
+                            <tr>
+                                <th rowspan="2">Информационный ресурс</th>
+                                <th colspan="2">За день</th>
+                                <th colspan="2">За неделю</th>
+                                <th colspan="2">За месяц</th>
+                            </tr>
+                            <tr>
+                                <th>Температура</th>
+                                <th>Влажность </th>
+                                <th>Температура</th>
+                                <th>Влажность</th>
+                                <th>Температура</th>
+                                <th>Влажность</th>
+                            </tr>
                         </thead>
                         <tbody>
+                        <c:forEach items="${tableDto.rowDtoMap}" var="rowDto">
+                            <tr id="${rowDto.key.providerId}">
+                                <td>
+                                    <a href="${rowDto.key.uiLink}">${rowDto.key.name}</a>
+                                </td>
+                                <c:forEach items="${rowDto.value.cellDtoMap}" var="cellDto">
+                                    <td>
+                                        <c:if test="${empty cellDto.value.rate}">
+                                            -
+                                        </c:if>
+                                        <c:if test="${not empty cellDto.value.rate}">
+                                            ${cellDto.value.rate} %
+                                        </c:if>
+                                    </td>
+                                </c:forEach>
+                            </tr>
+                            <tr id="${rowDto.key.providerId}-weather" class="collapse">
+                                <td colspan="7">
+                                    <div class="col-sm-12 col-lg-12">
+                                        <c:forEach items="${rowDto.value.requests}" var="forecastObject">
+                                            <div class="col-sm-1 col-lg-1 weatherBox" style="font-size: 24px;">
+                                                <div class="col-sm-12 col-lg-12">
+                                                    <span>${forecastObject.forecastDayOfWeek}</span>
+                                                </div>
+                                                <c:forEach items="${forecastObject.forecasts}" var="forecast">
+                                                    <c:if test="${forecast.key eq 'PHENOMENA_DAY'}">
+                                                        <div class="col-sm-12 col-lg-12 icon-font-table-lg" style="padding-bottom: 10px; padding-top: 10px;">
+                                                            <i class="wi wi-day-lightning"></i>
+                                                                <%--<i class="wi ${forecast.key.icon}"></i>--%>
+                                                        </div>
+                                                    </c:if>
+                                                    <c:if test="${forecast.key eq 'TEMPERATURE_DAY'}">
+                                                        <div class="col-sm-12 col-lg-12">День</div>
+                                                        <div class="col-sm-12 col-lg-12 icon-font-table-md">
+                                                            <span>${forecast.value.value}<i class="wi wi-celsius"></i></span>
+                                                        </div>
+                                                    </c:if>
+                                                    <c:if test="${forecast.key eq 'PHENOMENA_NIGHT'}">
+                                                        <div class="col-sm-12 col-lg-12 icon-font-table-lg" style="padding-bottom: 10px; padding-top: 10px;">
+                                                            <i class="wi wi-day-lightning"></i>
+                                                                <%--<i class="wi ${forecast.key.icon}"></i>--%>
+                                                        </div>
+                                                    </c:if>
+                                                    <c:if test="${forecast.key eq 'TEMPERATURE_NIGHT'}">
+                                                        <div class="col-sm-12 col-lg-12">Ночь</div>
+                                                        <div class="col-sm-12 col-lg-12 icon-font-table-md">
+                                                            <span>${forecast.value.value}<i class="wi wi-celsius"></i></span>
+                                                        </div>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </div>
+                                        </c:forEach>
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
 
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
 
