@@ -55,4 +55,192 @@
         </sql>
     </changeSet>
 
+    <changeSet author="amarkevich" id="20150215-03" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">select count(*) FROM pg_class c WHERE c.relkind = 'S' AND c.relname = 'provider_seq';</sqlCheck>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE provider_seq;
+        </sql>
+    </changeSet>
+
+
+    <changeSet author="amarkevich" id="20150215-04" runAlways="true" runOnChange="true">
+        <comment>Forecast source</comment>
+        <sql>
+            CREATE TABLE TOP_WEATHER.PROVIDERS
+            (
+            PROVIDER_ID BIGINT PRIMARY KEY DEFAULT nextval('provider_seq'),
+            NAME varchar(2000) NOT NULL,
+            UI_LINK varchar(2000) NOT NULL,
+            ADD_DATE timestamp default now(),
+            UPDATE_DATE timestamp default now()
+            )
+        </sql>
+    </changeSet>
+
+    <changeSet author="amarkevich" id="20150215-12" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">select count(*) FROM pg_class c WHERE c.relkind = 'S' AND c.relname = 'request_rule_seq';</sqlCheck>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE request_rule_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet author="amarkevich" id="20150215-13" runAlways="true" runOnChange="true">
+        <comment>Forecast request rule</comment>
+        <sql>
+            CREATE TABLE TOP_WEATHER.REQUEST_RULES
+            (
+            REQUEST_RULE_ID BIGINT PRIMARY KEY DEFAULT nextval('request_rule_seq'),
+            REQUEST_TIME varchar(50) NOT NULL,
+            NAME varchar(2000) NOT NULL,
+            REQUEST_LINK varchar(2000) NOT NULL, <!--forecast request link-->
+            PROVIDER_ID BIGINT,
+            LOCATION_ID BIGINT,
+            ADD_DATE timestamp default now(),
+            UPDATE_DATE timestamp default now(),
+            CONSTRAINT FK_PROVIDER_ID FOREIGN KEY(PROVIDER_ID) REFERENCES TOP_WEATHER.PROVIDERS(PROVIDER_ID) ON DELETE RESTRICT,
+            CONSTRAINT FK_LOCATION_ID FOREIGN KEY(LOCATION_ID) REFERENCES TOP_WEATHER.LOCATIONS(LOCATION_ID) ON DELETE RESTRICT
+            )
+        </sql>
+    </changeSet>
+
+
+    <changeSet author="amarkevich" id="20150215-05" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">select count(*) FROM pg_class c WHERE c.relkind = 'S' AND c.relname = 'request_seq';</sqlCheck>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE request_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet author="amarkevich" id="20150215-06" runAlways="true" runOnChange="true">
+        <comment>Forecast request</comment>
+        <sql>
+            CREATE TABLE TOP_WEATHER.REQUESTS
+            (
+            REQUEST_ID BIGINT PRIMARY KEY DEFAULT nextval('request_seq'),
+            REQUEST_DATE timestamp default now(),
+            REQUEST_RULE_ID BIGINT NOT NULL,
+            FORECAST_DATE timestamp NOT NULL,  <!--Дата, на которую запрашиваются данные(завтрашний день)-->
+            CONSTRAINT FK_REQUEST_RULE_ID FOREIGN KEY(REQUEST_RULE_ID) REFERENCES TOP_WEATHER.REQUEST_RULES(REQUEST_RULE_ID) ON DELETE RESTRICT
+            )
+        </sql>
+    </changeSet>
+
+    <changeSet author="amarkevich" id="20150215-10" runAlways="true" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">select count(*) FROM pg_class c WHERE c.relkind = 'S' AND c.relname = 'forecast_seq';</sqlCheck>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE forecast_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet author="amarkevich" id="20150215-11" runAlways="true" runOnChange="true">
+        <comment>Forecast</comment>
+        <sql>
+            CREATE TABLE TOP_WEATHER.FORECASTS
+            (
+            FORECAST_ID BIGINT PRIMARY KEY DEFAULT nextval('forecast_seq'),
+            UPDATE_DATE timestamp default now(),
+            REQUEST_ID BIGINT NOT NULL,
+            PARAM varchar(2000) NOT NULL,
+            VALUE varchar(2000) NOT NULL,
+            VERIFICATION_FORECAST_ID BIGINT,
+            RATE INT,
+            CONSTRAINT FK_REQUEST_ID FOREIGN KEY(REQUEST_ID) REFERENCES TOP_WEATHER.REQUESTS(REQUEST_ID) ON DELETE RESTRICT,
+            CONSTRAINT FK_VERIFICATION_FORECAST_ID FOREIGN KEY(VERIFICATION_FORECAST_ID) REFERENCES TOP_WEATHER.FORECASTS(FORECAST_ID) ON DELETE RESTRICT
+            )
+        </sql>
+    </changeSet>
+
+    <changeSet author="amarkevich" id="20150215-14" runAlways="true" runOnChange="true">
+        <comment>Providers, Locations, Rules</comment>
+        <sql>
+            INSERT INTO TOP_WEATHER.PROVIDERS (NAME, UI_LINK) VALUES ('gismeteo.by', 'http://gismeteo.by' );
+            INSERT INTO TOP_WEATHER.PROVIDERS (NAME, UI_LINK) VALUES ('pogoda.by', 'http://pogoda.by' );
+            INSERT INTO TOP_WEATHER.PROVIDERS (NAME, UI_LINK) VALUES ('pogoda.yandex.by', 'https://pogoda.yandex.by' );
+            INSERT INTO TOP_WEATHER.PROVIDERS (NAME, UI_LINK) VALUES ('weather.com', 'http://www.weather.com' );
+
+            INSERT INTO TOP_WEATHER.LOCATIONS (NAME, UID) VALUES ('Могилев', '1' );
+            INSERT INTO TOP_WEATHER.LOCATIONS (NAME, UID) VALUES ('Минск', '2' );
+            INSERT INTO TOP_WEATHER.LOCATIONS (NAME, UID) VALUES ('Москва', '3' );
+            INSERT INTO TOP_WEATHER.LOCATIONS (NAME, UID) VALUES ('Париж', '4' );
+            INSERT INTO TOP_WEATHER.LOCATIONS (NAME, UID) VALUES ('Анталья', '5' );
+
+            <!--Могилев-->
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
+            VALUES ('WEEK','Могилев. gismeteo. на неделю','http://gismeteo.by.....',1,1);
+
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
+            VALUES ('WEEK','Могилев. pogoda.by. на неделю','http://pogoda.by.....',2,1);
+
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
+            VALUES ('WEEK','Могилев. pogoda.yandex.by. на неделю','http://pogoda.yandex.by.....',3,1);
+
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME, REQUEST_LINK, PROVIDER_ID, LOCATION_ID)
+            VALUES ('WEEK', 'Могилев. weather.com. на неделю', 'http://weather.com.....', 4, 1);
+
+            <!--Минск-->
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
+            VALUES ('WEEK','Могилев. gismeteo. на неделю','http://gismeteo.by.....',1,2);
+
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
+            VALUES ('WEEK','Могилев. pogoda.by. на неделю','http://pogoda.by.....',2,2);
+
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
+            VALUES ('WEEK','Могилев. pogoda.yandex.by. на неделю','http://pogoda.yandex.by.....',3,2);
+
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME, REQUEST_LINK, PROVIDER_ID, LOCATION_ID)
+            VALUES ('WEEK', 'Могилев. weather.com. на неделю', 'http://weather.com.....', 4, 2);
+            <!---->
+
+            <!--Москва-->
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
+            VALUES ('WEEK','Могилев. gismeteo. на неделю','http://gismeteo.by.....',1,3);
+
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
+            VALUES ('WEEK','Могилев. pogoda.by. на неделю','http://pogoda.by.....',2,3);
+
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
+            VALUES ('WEEK','Могилев. pogoda.yandex.by. на неделю','http://pogoda.yandex.by.....',3,3);
+
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME, REQUEST_LINK, PROVIDER_ID, LOCATION_ID)
+            VALUES ('WEEK', 'Могилев. weather.com. на неделю', 'http://weather.com.....', 4, 3);
+            <!---->
+
+            <!--Париж-->
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
+            VALUES ('WEEK','Могилев. gismeteo. на неделю','http://gismeteo.by.....',1,4);
+
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
+            VALUES ('WEEK','Могилев. pogoda.by. на неделю','http://pogoda.by.....',2,4);
+
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
+            VALUES ('WEEK','Могилев. pogoda.yandex.by. на неделю','http://pogoda.yandex.by.....',3,4);
+
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME, REQUEST_LINK, PROVIDER_ID, LOCATION_ID)
+            VALUES ('WEEK', 'Могилев. weather.com. на неделю', 'http://weather.com.....', 4, 4);
+            <!---->
+
+            <!--Анталья-->
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
+            VALUES ('WEEK','Могилев. gismeteo. на неделю','http://gismeteo.by.....',1,5);
+
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
+            VALUES ('WEEK','Могилев. pogoda.by. на неделю','http://pogoda.by.....',2,5);
+
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
+            VALUES ('WEEK','Могилев. pogoda.yandex.by. на неделю','http://pogoda.yandex.by.....',3,5);
+
+            INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME, REQUEST_LINK, PROVIDER_ID, LOCATION_ID)
+            VALUES ('WEEK', 'Могилев. weather.com. на неделю', 'http://weather.com.....', 4, 5);
+            <!---->
+        </sql>
+    </changeSet>
+
 </databaseChangeLog> 
