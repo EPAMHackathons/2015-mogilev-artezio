@@ -89,6 +89,7 @@ public class GismeteoRUProvider implements WeatherForecastProvider {
         }
         Request dayRequest = new Request();
         Forecast temperatureForecast = new Forecast();
+        temperatureForecast.setRequest(dayRequest);
         FeatureType featuretype;
         if(periodOfDay.equals(PeriodOfDay.DAY)){
             featuretype = FeatureType.TEMPERATURE_DAY;
@@ -105,6 +106,7 @@ public class GismeteoRUProvider implements WeatherForecastProvider {
             featuretype = FeatureType.OVERCAST_NIGHT;
         }
         Forecast overcastForecast = new Forecast();
+        overcastForecast.setRequest(dayRequest);
         overcastForecast.setFeatureType(featuretype);
         overcastForecast.setValue(overcast);
         dayRequest.getForecasts().put(featuretype, overcastForecast);
@@ -115,6 +117,7 @@ public class GismeteoRUProvider implements WeatherForecastProvider {
             featuretype = FeatureType.PHENOMENA_NIGHT;
         }
         Forecast phenomenaForecast = new Forecast();
+        phenomenaForecast.setRequest(dayRequest);
         phenomenaForecast.setFeatureType(featuretype);
         phenomenaForecast.setValue(phenomens);
         dayRequest.getForecasts().put(featuretype, phenomenaForecast);

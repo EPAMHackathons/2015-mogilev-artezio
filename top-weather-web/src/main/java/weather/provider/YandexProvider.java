@@ -17,7 +17,7 @@ import java.util.*;
  * @author vosipenko
  *         on 15.02.2015.
  */
-@Component("pogoda.yandex.by")
+//@Component("pogoda.yandex.by")
 public class YandexProvider implements WeatherForecastProvider {
 
     @Override

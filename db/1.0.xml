@@ -149,7 +149,7 @@
             UPDATE_DATE timestamp default now(),
             REQUEST_ID BIGINT NOT NULL,
             PARAM varchar(2000) NOT NULL,
-            VALUE varchar(2000) NOT NULL,
+            VALUE varchar(2000),
             RATE INT,
             CONSTRAINT FK_REQUEST_ID FOREIGN KEY(REQUEST_ID) REFERENCES TOP_WEATHER.REQUESTS(REQUEST_ID) ON DELETE RESTRICT
             )
