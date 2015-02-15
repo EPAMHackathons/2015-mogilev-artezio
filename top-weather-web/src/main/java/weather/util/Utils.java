@@ -1,6 +1,7 @@
 package weather.util;
 
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 import weather.dto.RequestDto;
 import weather.model.Request;
@@ -34,6 +35,18 @@ public class Utils {
         return requestsDto;
     }
 
+    /*
+    * Compare rated with real
+    * */
+    public static Integer calcTempRate(String ratedValue, String realValue) {
+        if (StringUtils.isEmpty(ratedValue) || StringUtils.isEmpty(realValue) )
+            return null;
+
+        if (ratedValue.equals(realValue))
+            return 100;
+
+        return 50;
+    }
 }
 
 

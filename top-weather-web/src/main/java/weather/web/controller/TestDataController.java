@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import weather.beans.TopWeatherBean;
 import weather.model.Forecast;
 import weather.model.Location;
 import weather.model.Request;
@@ -25,10 +26,25 @@ public class TestDataController {
     Random randomParamValue = new Random();
 
     @Autowired
+    private TopWeatherBean topWeatherBean;
+
+    @Autowired
     private RequestService requestService;
 
     @Autowired
     private LocationService locationService;
+
+    @RequestMapping(value = "/rate.html")
+    @Transactional
+    public void calcRate(HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("UTF-8");
+
+        topWeatherBean.calculateRate();
+
+        response.setContentType("text/html");
+        response.resetBuffer();
+        response.getWriter().print("Hello");
+    }
 
 
     @RequestMapping(value = "/test.html")
@@ -40,8 +56,8 @@ public class TestDataController {
         List<Date> dates = new ArrayList<Date>();
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, -4);
-        for (int i = 0; i < 6 ; i++) {
+        calendar.add(Calendar.DATE, -3);
+        for (int i = 0; i < 3 ; i++) {
             calendar.add(Calendar.DATE, 1);
             dates.add(calendar.getTime());
         }
@@ -54,7 +70,7 @@ public class TestDataController {
                     if (RequestTime.WEEK.equals(requestRule.getRequestTime())) {
                         Calendar calendarTomorrow = Calendar.getInstance();
                         calendarTomorrow.setTime(requestDate);
-                        calendarTomorrow.add(Calendar.DATE, 1);
+                        //calendarTomorrow.add(Calendar.DATE, 1);
                         for (int i = 1 ; i <= 7; i++) {
                             requestService.save(createRequest(requestRule, requestDate, calendarTomorrow.getTime()));
                             calendarTomorrow.add(Calendar.DATE, 1);
@@ -63,10 +79,10 @@ public class TestDataController {
                 }
             }
             readyPercent += 100 / dates.size();
-            System.out.println(String.format("Test data generated for %d ", readyPercent));
+            System.out.println(String.format("Test data generated for %d percent", readyPercent));
         }
 
-        System.out.println(String.format("Test data generated for %d ", 100));
+        System.out.println(String.format("Test data generated for %d percent", 100));
 
         response.setContentType("text/html");
         response.resetBuffer();
@@ -82,7 +98,7 @@ public class TestDataController {
             Forecast forecast = new Forecast();
             forecast.setFeatureType(featureType);
             forecast.setUpdateDate(requestDate);
-            forecast.setRate(randomRate.nextInt(101));
+            //forecast.setRate(randomRate.nextInt(101));
             forecast.setValue(String.valueOf(randomParamValue.nextInt(50) - 25));
             forecast.setRequest(request);
             request.getForecasts().put(featureType, forecast);

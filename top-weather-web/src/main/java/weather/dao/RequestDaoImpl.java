@@ -76,4 +76,35 @@ public class RequestDaoImpl extends AbstractHibernateDao<Request> implements Req
 
         return result;
     }
+
+    public List<Request> getRequestsByDate(Date requestDate, Date forecastDate, Long ruleId) {
+
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.createAlias("requestRule", "requestRule");
+        criteria.createAlias("requestRule.location", "location");
+        criteria.createAlias("requestRule.provider", "provider");
+
+        if (ruleId != null) {
+            criteria.add(Restrictions.eq("requestRule.requestRuleId", ruleId));
+        }
+
+        if (forecastDate != null) {
+            criteria.add(Restrictions.ge("forecastDate", Utils.formatStartDate(forecastDate)));
+            criteria.add(Restrictions.le("forecastDate", Utils.formatEndDate(forecastDate)));
+        }
+
+        if (requestDate != null) {
+            criteria.add(Restrictions.ge("requestDate", Utils.formatStartDate(requestDate)));
+            criteria.add(Restrictions.le("requestDate", Utils.formatEndDate(requestDate)));
+        }
+
+        List<Request>  result = criteria.list();
+
+        for (Request request : result ) {
+            Hibernate.initialize(request.getForecasts());
+            Hibernate.initialize(request.getRequestRule());
+        }
+
+        return result;
+    }
 }
