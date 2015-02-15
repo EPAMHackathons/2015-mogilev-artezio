@@ -46,7 +46,7 @@ public class RequestDaoImpl extends AbstractHibernateDao<Request> implements Req
                 break;
             }
             case WEEK: {
-                endForecastDate.add(Calendar.DAY_OF_WEEK, 7);
+                endForecastDate.add(Calendar.DATE, 5);
                 ruleRequestTime = RequestTime.WEEK;
                 break;
             }
