@@ -32,8 +32,16 @@ public class Forecast extends BaseEntity implements Serializable {
     @JoinColumn(name = "REQUEST_ID", nullable = false)
     private Request request;
 
+    public Forecast() {
+    }
+
+    public Forecast(FeatureType featureType) {
+        this.featureType = featureType;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "VERIFICATION_FORECAST_ID", nullable = true)
+
     private Forecast verificationForecast;
 
     public Long getForecastId() {
