@@ -79,10 +79,6 @@ table tbody, table thead tr > th{
     background-color: rgba(189, 188, 188, 0.31);
 }
 
-#forecastTable tbody tr:first-child{
-    color: #46a32c;
-}
-
 @media (min-width: 768px) {
     .icon-font-md {
         font-size: 40px;

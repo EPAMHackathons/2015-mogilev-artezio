@@ -3,6 +3,7 @@ $(document).ready(function () {
     var locationName = typeof $.cookie('locationName') === 'undefined' ? 'Могилев': $.cookie('locationName');
     $('.dropdown button#dropdownMenuBtn').html(locationName);
 
+    $('#forecastTable tbody').children("tr[id$='-weather']:first").addClass('in');
 
     $('#cityDropdown li > a').click( function(event) {
         var locationUidValue = $(this).data('location');
@@ -16,13 +17,13 @@ $(document).ready(function () {
         $('body, html').animate({scrollTop: 0}, 1000);
     });
 
-    $('#nav .navbar-nav li>a').click(function() {
+    $('#nav .navbar-nav li > a.menu-item').click(function() {
         var blockId = $(this).attr('href');
         var position = $(blockId).offset().top;
         $('body, html').animate({scrollTop: position}, 700);
     });
 
-    $('#btn-top-10').click(function(e) {
+    $('a.btn-top-10').click(function(e) {
         e.preventDefault();
         var blockId = $(this).attr('href');
         var position = $(blockId).offset().top - 50;

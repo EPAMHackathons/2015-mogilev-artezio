@@ -30,7 +30,7 @@
       <div class="dropdown">
         <ul class="nav navbar-nav navbar-right">
           <li><a class="menu-item" href="#main">Главная</a></li>
-          <li><a id="truthfulTableBtn" href="#content">Статистика всех сайтов</a></li>
+          <li><a class="btn-top-10" href="#content">Статистика всех сайтов</a></li>
           <li><a class="menu-item" href="#about">О сервисе</a></li>
         </ul>
         <div class="dropdown pull-right" style="padding-top: 1%; padding-right: 1%;">
@@ -55,11 +55,11 @@
 </nav>
 
 <div id="main" class="home">
-  <div class="text-vcenter">
-    <h1>Top Weather Analyzer</h1>
-    <h3>This is a awesome weather analyzer</h3>
-    <a href="#content" id="btn-top-10" class="btn btn-default btn-lg">Просмотреть статистику</a>
-  </div>
+    <div class="text-vcenter">
+      <h1>Крутой анализатор погодных сайтов</h1>
+      <h3>Почувствуйте ценность достоверности прогноза погоды</h3>
+      <a href="#content" class="btn-top-10 btn btn-default btn-lg" style="margin-top: 5%;">Просмотреть статистику</a>
+    </div>
 </div>
 
 <div id="content">
@@ -109,8 +109,7 @@
                       <div class="col-sm-12 col-lg-12" style="font-weight: bold;">
                         <span>${forecastObject.forecastDayOfWeek}</span>
                       </div>
-                      <c:forEach items="<%=FeatureType.values()
-                        %>" var="featureType">
+                      <c:forEach items="<%=FeatureType.values()%>" var="featureType">
                         <c:choose>
                           <c:when test="${featureType eq 'TEMPERATURE_DAY'}">
                               <div class="col-sm-12 col-lg-12">День</div>
@@ -155,30 +154,28 @@
 <div id="about" class="pad-section">
   <div class="container">
     <div class="row">
-      <div class="col-sm-6 col-lg-6">
-        <img src="http://placehold.it/350x150" alt=""/>
+      <div class="col-sm-6 col-lg-6 text-center">
+          <h2>TOP Weather позволяет:</h2>
+          <ul class="lead" style="text-align: left;">
+            <li>Экономить время
+            </li>
+            <li> Планировать свою деятельность с минимально возможным влиянием погодных условий
+            </li>
+            <li> Завершить споры о «наилучшем» погодном сайте
+            </li>
+          </ul>
+          </p>
       </div>
-      <div class="col-sm-6 text-center">
-        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in sem cras amet.</h2>
-        <p class="lead">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum metus et
-          ligula venenatis, at rhoncus nisi molestie. Pellentesque porttitor elit suscipit massa laoreet
-          metus.
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 col-lg-12 text-center">
-        <p class="lead">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum metus et ligula venenatis,
-          at rhoncus nisi molestie. Pellentesque porttitor elit suscipit massa laoreet metus. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Sed interdum metus et ligula venenatis,
-          at rhoncus nisi molestie. Pellentesque porttitor elit suscipit massa laoreet metus.Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Sed interdum metus et ligula venenatis,
-          at rhoncus nisi molestie. Pellentesque porttitor elit suscipit massa laoreet metus.Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Sed interdum metus et ligula venenatis,
-          at rhoncus nisi molestie. Pellentesque porttitor elit suscipit massa laoreet metus.
-        </p>
+      <div class="col-sm-6 col-lg-6 text-center">
+        <h2> Что такое TOP Weather ?</h2>
+        <ul class="lead" style="text-align: left;">
+          <li> анализ достоверности погодных сайтов
+          </li>
+          <li> отображение наиболее достоверного информационного ресурса в разрезе день / неделя / месяц
+          </li>
+          <li> отображение погоды на неделю наиболее высокорейтинговыми ресурсами
+          </li>
+        </ul>
       </div>
     </div>
   </div>
