@@ -1,10 +1,15 @@
 $(document).ready(function () {
 
+    var locationName = typeof $.cookie('locationName') === 'undefined' ? 'Могилев': $.cookie('locationName');
+    $('.dropdown button#dropdownMenuBtn').html(locationName);
+
+
     $('#cityDropdown li > a').click( function(event) {
         var locationUidValue = $(this).data('location');
         var locationName = $(event.target).text();
-        //$('.dropwown button#dropdownMenuBtn').html(locationName);
-        $.cookie('locationUid', JSON.stringify({'uid': locationUidValue, 'name': locationName}), { expires: 1, path: '/' });
+        $('.dropdown button#dropdownMenuBtn').html(locationName);
+        $.cookie('locationUid', locationUidValue, { expires: 1, path: '/' });
+        $.cookie('locationName', locationName, { expires: 1, path: '/' });
     });
 
     $('.scroll-top').click(function() {

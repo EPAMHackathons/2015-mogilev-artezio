@@ -27,7 +27,7 @@ public class TopWeatherController {
 
     @RequestMapping(value = "/main.html")
     public ModelAndView main (@RequestParam(value = "locationUid", required = false, defaultValue = "1") String locationUid) {
-        ModelAndView mv = new ModelAndView("index");
+        ModelAndView mv = new ModelAndView("main");
         List<Location> locations = locationService.getAll();
         mv.addObject("locations", locations);
 
