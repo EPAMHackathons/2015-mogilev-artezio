@@ -174,71 +174,71 @@
 
             <!--Могилев-->
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Могилев. gismeteo. на завтра','http://gismeteo.by.....',1,1);
+            VALUES ('WEEK','Могилев. gismeteo. на неделю','http://gismeteo.by.....',1,1);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Могилев. pogoda.by. на завтра','http://pogoda.by.....',2,1);
+            VALUES ('WEEK','Могилев. pogoda.by. на неделю','http://pogoda.by.....',2,1);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Могилев. pogoda.yandex.by. на завтра','http://pogoda.yandex.by.....',3,1);
+            VALUES ('WEEK','Могилев. pogoda.yandex.by. на неделю','http://pogoda.yandex.by.....',3,1);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME, REQUEST_LINK, PROVIDER_ID, LOCATION_ID)
-            VALUES ('WEEK', 'Могилев. weather.com. на завтра', 'http://weather.com.....', 4, 1);
+            VALUES ('WEEK', 'Могилев. weather.com. на неделю', 'http://weather.com.....', 4, 1);
 
             <!--Минск-->
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Могилев. gismeteo. на завтра','http://gismeteo.by.....',1,2);
+            VALUES ('WEEK','Могилев. gismeteo. на неделю','http://gismeteo.by.....',1,2);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Могилев. pogoda.by. на завтра','http://pogoda.by.....',2,2);
+            VALUES ('WEEK','Могилев. pogoda.by. на неделю','http://pogoda.by.....',2,2);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Могилев. pogoda.yandex.by. на завтра','http://pogoda.yandex.by.....',3,2);
+            VALUES ('WEEK','Могилев. pogoda.yandex.by. на неделю','http://pogoda.yandex.by.....',3,2);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME, REQUEST_LINK, PROVIDER_ID, LOCATION_ID)
-            VALUES ('WEEK', 'Могилев. weather.com. на завтра', 'http://weather.com.....', 4, 2);
+            VALUES ('WEEK', 'Могилев. weather.com. на неделю', 'http://weather.com.....', 4, 2);
             <!---->
 
             <!--Москва-->
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Могилев. gismeteo. на завтра','http://gismeteo.by.....',1,3);
+            VALUES ('WEEK','Могилев. gismeteo. на неделю','http://gismeteo.by.....',1,3);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Могилев. pogoda.by. на завтра','http://pogoda.by.....',2,3);
+            VALUES ('WEEK','Могилев. pogoda.by. на неделю','http://pogoda.by.....',2,3);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Могилев. pogoda.yandex.by. на завтра','http://pogoda.yandex.by.....',3,3);
+            VALUES ('WEEK','Могилев. pogoda.yandex.by. на неделю','http://pogoda.yandex.by.....',3,3);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME, REQUEST_LINK, PROVIDER_ID, LOCATION_ID)
-            VALUES ('WEEK', 'Могилев. weather.com. на завтра', 'http://weather.com.....', 4, 3);
+            VALUES ('WEEK', 'Могилев. weather.com. на неделю', 'http://weather.com.....', 4, 3);
             <!---->
 
             <!--Париж-->
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Могилев. gismeteo. на завтра','http://gismeteo.by.....',1,4);
+            VALUES ('WEEK','Могилев. gismeteo. на неделю','http://gismeteo.by.....',1,4);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Могилев. pogoda.by. на завтра','http://pogoda.by.....',2,4);
+            VALUES ('WEEK','Могилев. pogoda.by. на неделю','http://pogoda.by.....',2,4);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Могилев. pogoda.yandex.by. на завтра','http://pogoda.yandex.by.....',3,4);
+            VALUES ('WEEK','Могилев. pogoda.yandex.by. на неделю','http://pogoda.yandex.by.....',3,4);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME, REQUEST_LINK, PROVIDER_ID, LOCATION_ID)
-            VALUES ('WEEK', 'Могилев. weather.com. на завтра', 'http://weather.com.....', 4, 4);
+            VALUES ('WEEK', 'Могилев. weather.com. на неделю', 'http://weather.com.....', 4, 4);
             <!---->
 
             <!--Анталья-->
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Могилев. gismeteo. на завтра','http://gismeteo.by.....',1,5);
+            VALUES ('WEEK','Могилев. gismeteo. на неделю','http://gismeteo.by.....',1,5);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Могилев. pogoda.by. на завтра','http://pogoda.by.....',2,5);
+            VALUES ('WEEK','Могилев. pogoda.by. на неделю','http://pogoda.by.....',2,5);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME,REQUEST_LINK,PROVIDER_ID,LOCATION_ID)
-            VALUES ('WEEK','Могилев. pogoda.yandex.by. на завтра','http://pogoda.yandex.by.....',3,5);
+            VALUES ('WEEK','Могилев. pogoda.yandex.by. на неделю','http://pogoda.yandex.by.....',3,5);
 
             INSERT INTO TOP_WEATHER.REQUEST_RULES (REQUEST_TIME,NAME, REQUEST_LINK, PROVIDER_ID, LOCATION_ID)
-            VALUES ('WEEK', 'Могилев. weather.com. на завтра', 'http://weather.com.....', 4, 5);
+            VALUES ('WEEK', 'Могилев. weather.com. на неделю', 'http://weather.com.....', 4, 5);
             <!---->
         </sql>
     </changeSet>
