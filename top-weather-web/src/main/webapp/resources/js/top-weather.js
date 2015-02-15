@@ -25,7 +25,7 @@ $(document).ready(function () {
     $('#btn-top-10').click(function(e) {
         e.preventDefault();
         var blockId = $(this).attr('href');
-        var position = $(blockId).offset().top;
+        var position = $(blockId).offset().top - 50;
         $('body, html').animate({scrollTop: position}, 700);
     });
 

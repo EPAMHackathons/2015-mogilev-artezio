@@ -1,3 +1,4 @@
+<%@ page import="weather.model.enumeration.FeatureType" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
@@ -108,31 +109,34 @@
                       <div class="col-sm-12 col-lg-12" style="font-weight: bold;">
                         <span>${forecastObject.forecastDayOfWeek}</span>
                       </div>
-                      <c:forEach items="${forecastObject.forecasts}" var="forecast">
-                        <c:if test="${forecast.key eq 'PHENOMENA_DAY'}">
-                          <div class="col-sm-12 col-lg-12 icon-font-table-lg" style="padding-bottom: 10px; padding-top: 10px;">
-                            <i class="wi wi-day-lightning"></i>
-                              <%--<i class="wi ${forecast.key.icon}"></i>--%>
-                          </div>
-                        </c:if>
-                        <c:if test="${forecast.key eq 'TEMPERATURE_DAY'}">
-                          <div class="col-sm-12 col-lg-12">День</div>
-                          <div class="col-sm-12 col-lg-12 icon-font-table-md">
-                            <span>${forecast.value.value}<i class="wi wi-celsius"></i></span>
-                          </div>
-                        </c:if>
-                        <c:if test="${forecast.key eq 'PHENOMENA_NIGHT'}">
-                          <div class="col-sm-12 col-lg-12 icon-font-table-lg" style="padding-bottom: 10px; padding-top: 10px;">
-                            <i class="wi wi-day-lightning"></i>
-                              <%--<i class="wi ${forecast.key.icon}"></i>--%>
-                          </div>
-                        </c:if>
-                        <c:if test="${forecast.key eq 'TEMPERATURE_NIGHT'}">
-                          <div class="col-sm-12 col-lg-12">Ночь</div>
-                          <div class="col-sm-12 col-lg-12 icon-font-table-md">
-                            <span>${forecast.value.value}<i class="wi wi-celsius"></i></span>
-                          </div>
-                        </c:if>
+                      <c:forEach items="<%=FeatureType.values()
+                        %>" var="featureType">
+                        <c:choose>
+                          <c:when test="${featureType eq 'TEMPERATURE_DAY'}">
+                              <div class="col-sm-12 col-lg-12">День</div>
+                              <div class="col-sm-12 col-lg-12 icon-font-table-md">
+                                <span>${forecastObject.forecasts[featureType].value}<i class="wi wi-celsius"></i></span>
+                              </div>
+                          </c:when>
+                          <c:when test="${featureType eq 'PHENOMENA_DAY'}">
+                              <div class="col-sm-12 col-lg-12 icon-font-table-lg" style="padding-bottom: 10px; padding-top: 10px;">
+                                <i class="wi wi-day-lightning"></i>
+                                  <%--<i class="wi ${forecast.key.icon}"></i>--%>
+                              </div>
+                          </c:when>
+                          <c:when test="${featureType eq 'TEMPERATURE_NIGHT'}">
+                              <div class="col-sm-12 col-lg-12">Ночь</div>
+                              <div class="col-sm-12 col-lg-12 icon-font-table-md">
+                                <span>${forecastObject.forecasts[featureType].value}<i class="wi wi-celsius"></i></span>
+                              </div>
+                          </c:when>
+                          <c:when test="${featureType eq 'PHENOMENA_NIGHT'}">
+                              <div class="col-sm-12 col-lg-12 icon-font-table-lg" style="padding-bottom: 10px; padding-top: 10px;">
+                                <i class="wi wi-day-lightning"></i>
+                                  <%--<i class="wi ${forecast.key.icon}"></i>--%>
+                              </div>
+                          </c:when>
+                        </c:choose>
                       </c:forEach>
                     </div>
                   </c:forEach>
