@@ -30,6 +30,7 @@ public class PogodaBYProvider implements WeatherForecastProvider {
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(currentTime);
             int rowNumber = 1;
+            int dayCount = 1;
             weeksRequests = new ArrayList<Request>();
             Date weatherDay = null;
 
@@ -53,9 +54,14 @@ public class PogodaBYProvider implements WeatherForecastProvider {
                             weeksRequests.add(parseForecastWeather(weatherDay, periodOfDay, forecastCells, rule));
                     }
                 } else {
+                    if(dayCount == 6)
+                    {
+                        break;
+                    }
                     if(weatherDay != null) {
                         calendar.add(Calendar.DATE, 1);
                     }
+                    dayCount++;
                     weatherDay = calendar.getTime();
                 }
             }
