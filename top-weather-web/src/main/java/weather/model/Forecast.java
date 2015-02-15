@@ -15,9 +15,6 @@ public class Forecast extends BaseEntity implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long forecastId;
 
-    @Column(name="UPDATE_DATE")
-    private Date updateDate;
-
     @Column(name = "PARAM")
     @Enumerated(EnumType.STRING)
     private FeatureType featureType;
@@ -45,14 +42,6 @@ public class Forecast extends BaseEntity implements Serializable {
 
     public void setForecastId(Long forecastId) {
         this.forecastId = forecastId;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
     }
 
     public FeatureType getFeatureType() {

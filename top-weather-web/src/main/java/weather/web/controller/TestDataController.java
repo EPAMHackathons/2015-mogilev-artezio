@@ -70,7 +70,6 @@ public class TestDataController {
                     if (RequestTime.WEEK.equals(requestRule.getRequestTime())) {
                         Calendar calendarTomorrow = Calendar.getInstance();
                         calendarTomorrow.setTime(requestDate);
-                        //calendarTomorrow.add(Calendar.DATE, 1);
                         for (int i = 1 ; i <= 7; i++) {
                             requestService.save(createRequest(requestRule, requestDate, calendarTomorrow.getTime()));
                             calendarTomorrow.add(Calendar.DATE, 1);
@@ -97,7 +96,6 @@ public class TestDataController {
         for (FeatureType featureType : FeatureType.values()) {
             Forecast forecast = new Forecast();
             forecast.setFeatureType(featureType);
-            forecast.setUpdateDate(requestDate);
             forecast.setRate(randomRate.nextInt(101));
             forecast.setValue(String.valueOf(randomParamValue.nextInt(50) - 25));
             forecast.setRequest(request);

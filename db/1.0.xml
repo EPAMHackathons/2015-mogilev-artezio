@@ -146,7 +146,6 @@
             CREATE TABLE TOP_WEATHER.FORECASTS
             (
             FORECAST_ID BIGINT PRIMARY KEY DEFAULT nextval('forecast_seq'),
-            UPDATE_DATE timestamp default now(),
             REQUEST_ID BIGINT NOT NULL,
             PARAM varchar(2000) NOT NULL,
             VALUE varchar(2000) NOT NULL,
