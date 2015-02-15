@@ -103,6 +103,7 @@ public class PogodaBYProvider implements WeatherForecastProvider {
         temperatureForecast.setFeatureType(featuretype);
         temperatureForecast.setValue(Integer.toString(temperature));
         dayRequest.getForecasts().put(featuretype, temperatureForecast);
+        temperatureForecast.setRequest(dayRequest);
 
         if(periodOfDay.equals(PeriodOfDay.DAY)){
             featuretype = FeatureType.OVERCAST_DAY;
@@ -114,6 +115,7 @@ public class PogodaBYProvider implements WeatherForecastProvider {
         overcastForecast.setFeatureType(featuretype);
         overcastForecast.setValue(overcast);
         dayRequest.getForecasts().put(featuretype, overcastForecast);
+        overcastForecast.setRequest(dayRequest);
 
         if(periodOfDay.equals(PeriodOfDay.DAY)){
             featuretype = FeatureType.PHENOMENA_DAY;
@@ -125,6 +127,7 @@ public class PogodaBYProvider implements WeatherForecastProvider {
         phenomenaForecast.setFeatureType(featuretype);
         phenomenaForecast.setValue(phenomens);
         dayRequest.getForecasts().put(featuretype, phenomenaForecast);
+        phenomenaForecast.setRequest(dayRequest);
         dayRequest.setForecastDate(weatherDay);
         dayRequest.setRequestDate(new Date());
         dayRequest.setRequestRule(rule);
