@@ -82,10 +82,8 @@ public class TestDataController {
             Forecast forecast = new Forecast();
             forecast.setFeatureType(featureType);
             forecast.setUpdateDate(requestDate);
-            if (featureType.equals(FeatureType.TEMPERATURE_DAY) || featureType.equals(FeatureType.TEMPERATURE_NIGHT)) {
-                forecast.setRate(randomRate.nextInt(101));
-                forecast.setValue(String.valueOf(randomParamValue.nextInt(50) - 25));
-            }
+            forecast.setRate(randomRate.nextInt(101));
+            forecast.setValue(String.valueOf(randomParamValue.nextInt(50) - 25));
             forecast.setRequest(request);
             request.getForecasts().put(featureType, forecast);
 
